@@ -3848,9 +3848,10 @@
     t.exports = {
         init: function(t, n, e) {
             var s = this;
-            this.simulation = n, this.wrapper = i.select(t), this.options = e, this.tick = a, this.options && !this.options.gifMode && (this.summaryItems = this.wrapper.append("div").attr("class", "number-items"), this.summaryItems.append("div").attr("class", "title").text("Compte"), this.summaryItem = this.summaryItems.selectAll(".item").data(["guéri", "non infecté", "malade"]).enter().append("div").attr("class", (function(t) {
-                return "item " + ("healthy" === t ? "well" : t)
-            })), this.summaryItem.append("div").attr("class", "sub-title").text(r), this.summaryNumber = this.summaryItem.append("div").attr("class", "number")), this.options && this.options.chart && (this.chartItem = this.wrapper.append("div").attr("class", "item chart"), this.options.gifMode || this.chartItem.append("div").attr("class", "title").text("Evolution dans le temps"), this.svg = this.chartItem.append("svg"), this.g = this.svg.append("g"), this.bg = this.g.append("rect").attr("class", "bg"), this.x = i.scaleLinear().domain([0, o]), this.y = i.scaleLinear(), this.stackGenerator = i.stack().keys(["sick", "well", "recovered"]), this.areaGenerator = i.area().x((function(t) {
+            this.simulation = n, this.wrapper = i.select(t), this.options = e, this.tick = a, this.options && !this.options.gifMode && (this.summaryItems = this.wrapper.append("div").attr("class", "number-items"), this.summaryItems.append("div").attr("class", "title").text("Compte"), this.summaryItem = this.summaryItems.selectAll(".item").data(["healthy", "recovered", "sick"]).enter().append("div").attr("class", (function(t) {
+                console.log('t', t)
+                return "item " + ("guéri" === t ? "well" : t)
+            })), this.summaryItem.append("div").attr("class", "sub-title").text(function(r){ if (r == 'healthy') return 'Pas malade'; if (r=='recovered') return 'Guéri'; return 'Malade' }), this.summaryNumber = this.summaryItem.append("div").attr("class", "number")), this.options && this.options.chart && (this.chartItem = this.wrapper.append("div").attr("class", "item chart"), this.options.gifMode || this.chartItem.append("div").attr("class", "title").text("Evolution dans le temps"), this.svg = this.chartItem.append("svg"), this.g = this.svg.append("g"), this.bg = this.g.append("rect").attr("class", "bg"), this.x = i.scaleLinear().domain([0, o]), this.y = i.scaleLinear(), this.stackGenerator = i.stack().keys(["sick", "well", "recovered"]), this.areaGenerator = i.area().x((function(t) {
                 return s.x(t.data.tick)
             })).y0((function(t) {
                 return s.y(t[0])
@@ -6089,7 +6090,7 @@
             r = n[1],
             o = n[2];
         return t.datetime = new Date(o, e - 1, r), t
-    })), o.selectAll(".hover-tap").text(a() ? "Tap" : "Hover");
+    })), o.selectAll(".hover-tap").text(a() ? "Toucher" : "Survoler");
     var /*u = e(47).init(".small-chart", s, {
             maxWidth: 40,
             aspect: .5
@@ -7951,7 +7952,7 @@
         h = a.STARTING_STORAGE,
         f = a.GIF_MODE,
         d = new r.init("#simulation-basic", {
-            resetText: "Recommencer la simlation",
+            resetText: "Run a new simulation",
             storage: JSON.parse(JSON.stringify(h))
         }),
         p = u(d.width, d.height),
@@ -7993,7 +7994,7 @@
         h = a.STARTING_STORAGE,
         f = a.GIF_MODE,
         d = new r.init("#simulation-quarantine", {
-            resetText: "Recommencer la simulation",
+            resetText: "Run a new simulation",
             storage: JSON.parse(JSON.stringify(h))
         }),
         p = u(d.width, d.height),
@@ -8078,7 +8079,7 @@
         h = a.STARTING_STORAGE,
         f = a.GIF_MODE,
         d = new r.init("#simulation-stop", {
-            resetText: "Recommencer la simulation",
+            resetText: "Run a new simulation",
             transferEnergy: !1,
             storage: JSON.parse(JSON.stringify(h))
         }),
@@ -8121,7 +8122,7 @@
         h = a.STARTING_STORAGE,
         f = a.GIF_MODE,
         d = new r.init("#simulation-stop-more", {
-            resetText: "Recommencer la simulation",
+            resetText: "Run a new simulation",
             transferEnergy: !1,
             storage: JSON.parse(JSON.stringify(h))
         }),
